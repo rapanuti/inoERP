@@ -1,0 +1,43 @@
+Requisitos e instalación
+=========================
+
+== Requerimientos ==
+
+servidor web HTTP 1. Ex. Nginx, Apache, IIS, Oracle HTTP
+2. PHP 5.5 o superior para las versiones hasta 0.4.1 y PHP para las versiones 7 + => 0.5.1
+3. MySQL (versión de servidor: 5.6.17+) o MariaDB
+    
+== Instalación automática == 
+
+1. Cargar todos los archivos en el servidor web
+2. Si se utiliza Apache a continuación, habilitar módulo mod_rewrite antes de seguir adelante
+3. Abrir el index.php / o página install.php y siga el proceso de instalación simple de cuatro pasos (usuario de MySQL debe tener toda la equivalente a la raíz privilegios a un usuario crear vistas. Puede cambiar a un usuario privilegiado menor después de la instalación mediante el cambio el nombre de usuario y contraseña @ incluye los fundamentos \ \ dbsettings.inc)
+4. Inicio de sesión en la aplicación utilizando id de usuario / contraseña - admin / admin
+
+==  Manual de Instalación ==
+
+1. Cambiar la configuración de DB @ incluir fundamentos \ \ dbsettings.inc
+2. Cambiar las session_set_cookie_params en el archivo de sesiones
+3. Importe el archivo de base de datos @ enine \ install \ inoerp.sql
+4. Cambie el .htaccess
+5. Inicio de sesión en la aplicación utilizando id de usuario / contraseña - admin / admin
+
+== Consideración de Seguridad  ==
+
+Siempre es aconsejable mantener los archivos de configuración fuera del directorio público. Si decide mantener la carpeta de configuración en el directorio raíz, a continuación, hacer a continuación dos cambios
+
+1. Modificar basics.inc @ incluye \ básicos de modificación
+require_once(INC_BASICS . DS .  'settings'. DS. "dbsettings.inc");  
+a  
+require_once(HOME_DIR . DS .  '/../settings'. DS. "dbsettings.inc");
+
+2. Modificar el archivo InoMail @ incluye \ general_class
+include_once __DIR__.'/../basics/settings/mailsettings.inc';  
+a 
+require_once(HOME_DIR . DS .  '/../settings'. DS. "mailsettings.inc")
+
+
+== Configuración opcional ==
+
+
+Si se requiere Auto-Calendario / ejecución de cualquier programa y luego programar los módulos principales del programa  modules/sys/program/start_program.php a través de una tarea programada.
